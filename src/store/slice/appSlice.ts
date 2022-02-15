@@ -2,7 +2,7 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 
 const initialAppState: initialAppStateType = {
   isLoading: false,
-  isError: 'Error'
+  isError: 'Error',
 }
 
 const appSlice = createSlice({
@@ -14,7 +14,7 @@ const appSlice = createSlice({
     },
     setError(state, action: PayloadAction<string>) {
       state.isError = action.payload
-    }
+    },
   }
 })
 
@@ -23,5 +23,5 @@ type initialAppStateType = {
   isError: string
 }
 
-export const {setLoading,setError} = appSlice.actions
+export const {setLoading, setError} = appSlice.actions
 export default appSlice.reducer
