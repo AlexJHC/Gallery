@@ -1,23 +1,17 @@
-import {appApi} from '../../../api/appApi';
-import {useEffect} from 'react';
-import {useDispatch} from 'react-redux';
-import {setLoading,} from '../../../store/slice/appSlice';
+import React, {useEffect} from 'react';
 
+import {useNavigate} from 'react-router-dom';
 
 export default function Home() {
 
-  const dispatch = useDispatch()
-
-  const {data: users, isLoading} = appApi.useFetchAllUsersQuery('')
+  const navigate = useNavigate()
 
   useEffect(() => {
-    dispatch(setLoading(isLoading))
-    // users && dispatch(setUsers(users))
-  }, [isLoading, users, dispatch])
+    navigate('users')
+  })
 
   return (
     <>
-
     </>
   )
 }

@@ -1,9 +1,12 @@
 .container {
+    position: absolute;
     width: 100%;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 100;
+    backdrop-filter: blur(1px);
 }
 .ring {
     display: inline-block;

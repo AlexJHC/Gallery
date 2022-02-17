@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 
 const initialAppState: initialAppStateType = {
-  isLoading: false,
+  isLoading: true,
   isError: 'Error',
 }
 
