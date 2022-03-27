@@ -41,11 +41,12 @@ export const usersApi = createApi({
       }
     }),
     fetchPhotos: build.query<ResponseMetaType<PhotoType[]>, PostsParamsType>({
-      query: ({page}) => ({
+      query: ({albumId, page}) => ({
         url: `/photos`,
         params: {
           _page: page,
           _limit: 10,
+          albumId_like:albumId
         }
       }),
       transformResponse(responseData: PhotoType[], meta): Promise<ResponseMetaType<PhotoType[]>> | ResponseMetaType<PhotoType[]> {
@@ -68,6 +69,7 @@ type PostsParamsType = {
   order?: string
   page?: number
   search?: string
+  albumId?: number | string
 }
 export type ResponseMetaType<T> = {
   responseData: T

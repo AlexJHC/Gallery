@@ -1,11 +1,11 @@
 import {configureStore} from '@reduxjs/toolkit';
 import appSlice from './slice/appSlice';
 import {usersApi} from '../api/usersApi';
-import usersSlice from './slice/usersSlice';
+import blogSlice from './slice/blogSlice';
 
 const reducer = {
   app: appSlice,
-  users: usersSlice,
+  blog: blogSlice,
   [usersApi.reducerPath]: usersApi.reducer,
 }
 

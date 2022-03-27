@@ -1,17 +1,16 @@
-import React, {ChangeEvent, useEffect, useState} from 'react';
+import React, {ChangeEvent, useCallback, useEffect, useState} from 'react';
 import {usersApi} from '../../../api/usersApi';
 import {setLoading} from '../../../store/slice/appSlice';
 import {useDispatch} from 'react-redux';
 import Grid from '@mui/material/Grid';
-import Pagination from '@mui/material/Pagination';
-import Paper from '@mui/material/Paper';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import Box from '@mui/material/Box';
 import {FormControl, InputLabel, TextField} from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import MenuItem from '@mui/material/MenuItem';
 import Select, {SelectChangeEvent} from '@mui/material/Select';
 import {AppDispatch} from '../../../store/store';
+import Container from '@mui/material/Container';
+import Pagin from '../../features/Pagin/Pagin';
 
 export default function Blog() {
 
@@ -19,6 +18,7 @@ export default function Blog() {
 
   const [selectValue, setSelectValue] = useState('none');
   const [page, setPage] = useState(1)
+
   const [search, setSearch] = useState<string>('')
   const [sort, setSort] = useState('')
   const [order, setOrder] = useState('')
@@ -33,7 +33,6 @@ export default function Blog() {
 
   const handleTitleSearch = (e: any) => setSearch(e.target.value)
   const handleClearSearch = () => setSearch('')
-
 
   const sortChanger = (value: string) => {
     switch (value) {
@@ -63,46 +62,35 @@ export default function Blog() {
     setSelectValue(event.target.value);
   };
 
-  const handleChangePage = (event: ChangeEvent<unknown>, value: number) => {
+  const handleChangePage = useCallback((event: ChangeEvent<unknown>, value: number) => {
     setPage(value);
-  };
+  }, [])
+
+  console.log(1)
+
 
   useEffect(() => {
     dispatch(setLoading(isLoading))
-    console.log(selectValue)
     sortChanger(selectValue)
   }, [dispatch, isLoading, responseData, selectValue])
 
   return (
-    <Paper
-      sx={{
-        p: 10,
-        margin: 'auto',
-        // maxWidth: ,
-        // flexGrow: 1,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: "center",
-        flexDirection: 'column'
-      }}
-      variant="outlined"
-    >
-      <Box sx={{display: 'flex', alignItems: 'stretch', justifyContent: 'space-around', width: '100vw'}}>
-        {/*<SearchIcon/>*/}
-        <div style={{display: 'flex', alignItems: 'flex-end'}}>
-          <TextField id="input-with-sx"
-                     label="Search"
-                     variant="standard"
-                     value={search}
-                     onChange={handleTitleSearch}/>
-          <IconButton
-            color="default"
-            aria-label="upload picture"
-            component="button"
-            onClick={handleClearSearch}>
-            {search && <HighlightOffIcon/>}
-          </IconButton>
-        </div>
+    <>
+      <Container fixed>
+        <TextField
+          id="input-with-sx"
+          label="Search"
+          variant="standard"
+          value={search}
+          onChange={handleTitleSearch}/>
+        <IconButton
+          disabled={search.length === 0}
+          color="default"
+          aria-label="delete search"
+          component="button"
+          onClick={handleClearSearch}>
+          <HighlightOffIcon/>
+        </IconButton>
         <FormControl sx={{m: 1, minWidth: 200}}>
           <InputLabel id="demo-simple-select-autowidth-label">Sort</InputLabel>
           <Select
@@ -121,7 +109,7 @@ export default function Blog() {
             <MenuItem value='title-down'>title: z - a</MenuItem>
           </Select>
         </FormControl>
-      </Box>
+      </Container>
       <Grid
         container
         spacing={{xs: 2, md: 4}}
@@ -134,11 +122,10 @@ export default function Blog() {
             <div>{item.title}</div>
           </Grid>)}
       </Grid>
-      {totalPages && totalPages > 0 ?
-        <Pagination
-          count={totalPages}
-          page={page}
-          onChange={handleChangePage}/> : null}
-    </Paper>
+      <Pagin
+        page={page}
+        totalPages={totalPages}
+        handleChangePage={handleChangePage}/>
+    </>
   )
 }

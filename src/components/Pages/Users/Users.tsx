@@ -1,11 +1,10 @@
 import {useDispatch} from 'react-redux';
 import {usersApi} from '../../../api/usersApi';
-import React, {ChangeEvent, useEffect, useState} from 'react';
+import React, {ChangeEvent, useCallback, useEffect, useState} from 'react';
 import {setLoading} from '../../../store/slice/appSlice';
 import Grid from '@mui/material/Grid';
 import AreaCard from '../../features/AreaCard';
-import Pagination from '@mui/material/Pagination';
-import Container from '@mui/material/Container';
+import Pagin from '../../features/Pagin/Pagin';
 
 export default function Users() {
   const dispatch = useDispatch()
@@ -15,9 +14,9 @@ export default function Users() {
   const {data, isLoading} = usersApi.useFetchAllUsersQuery({page})
   const {responseData, totalPages} = {...data}
 
-  const handleChangePage = (event: ChangeEvent<unknown>, value: number) => {
+  const handleChangePage = useCallback((event: ChangeEvent<unknown>, value: number) => {
     setPage(value);
-  }
+  },[])
 
   useEffect(() => {
     dispatch(setLoading(isLoading))
@@ -44,14 +43,10 @@ export default function Users() {
           />
         </Grid>
       ))}
-      <Container
-        fixed
-        sx={{pt: 4, justifyContent: 'center', display: 'flex'}}>
-        <Pagination
-          count={totalPages}
-          page={page}
-          onChange={handleChangePage}/>
-      </Container>
+      <Pagin
+        page={page}
+        totalPages={totalPages}
+        handleChangePage={handleChangePage}/>
     </Grid>
   )
 }
