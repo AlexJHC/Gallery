@@ -1,9 +1,10 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
-import {userType} from '../../api/usersApi';
+import {UserType} from '../../api/usersApi';
 
 const initialUsersState: initialAppStateType = {
   users: [],
-  usersDataLength: 0
+  usersDataLength: 0,
+  test: []
 }
 
 const usersSlice = createSlice({
@@ -13,13 +14,17 @@ const usersSlice = createSlice({
     setUsersDataLength(state, action: PayloadAction<number>) {
       state.usersDataLength = action.payload
     },
+    setData(state, action:PayloadAction<any>) {
+      state.test = action.payload
+    }
   }
 })
 
 type initialAppStateType = {
-  users: userType[]
+  users: UserType[]
   usersDataLength: number
+  test: any
 }
 
-export const {setUsersDataLength} = usersSlice.actions
+export const {setUsersDataLength,setData} = usersSlice.actions
 export default usersSlice.reducer

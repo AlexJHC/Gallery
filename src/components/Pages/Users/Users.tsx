@@ -1,21 +1,26 @@
 import {useDispatch} from 'react-redux';
 import {usersApi} from '../../../api/usersApi';
-import {useEffect} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 import {setLoading} from '../../../store/slice/appSlice';
 import Grid from '@mui/material/Grid';
 import AreaCard from '../../features/AreaCard';
+import Pagination from '@mui/material/Pagination';
 
 export default function Users() {
-
   const dispatch = useDispatch()
 
-  const {data, isLoading} = usersApi.useFetchAllUsersQuery(2)
-  const {pageUsersTotalCount, usersResponse} = {...data}
+  const [page, setPage] = useState(1)
+
+  const {data, isLoading} = usersApi.useFetchAllUsersQuery({page})
+  const {responseData, totalPages} = {...data}
+
+  const handleChangePage = (event: ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+  };
 
   useEffect(() => {
-    console.log(usersResponse)
     dispatch(setLoading(isLoading))
-  }, [dispatch, isLoading, usersResponse])
+  }, [dispatch, isLoading, responseData])
 
   return (
     <Grid
@@ -25,7 +30,7 @@ export default function Users() {
       alignItems="center"
       paddingTop={6}
       paddingBottom={6}>
-      {usersResponse && usersResponse.map(user => (
+      {responseData && responseData.map(user => (
         <Grid item key={user.id}>
           <AreaCard
             name={user.name}
@@ -34,9 +39,15 @@ export default function Users() {
             website={user.website}
             phone={user.phone}
             email={user.email}
+            location={user.address.geo}
           />
         </Grid>
       ))}
+      {totalPages && totalPages > 0 ?
+        <Pagination
+          count={totalPages}
+          page={page}
+          onChange={handleChangePage}/> : null}
     </Grid>
   )
 }
