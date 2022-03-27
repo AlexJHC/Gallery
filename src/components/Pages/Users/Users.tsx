@@ -5,22 +5,23 @@ import {setLoading} from '../../../store/slice/appSlice';
 import Grid from '@mui/material/Grid';
 import AreaCard from '../../features/AreaCard';
 import Pagination from '@mui/material/Pagination';
+import Container from '@mui/material/Container';
 
 export default function Users() {
   const dispatch = useDispatch()
 
-  const [page, setPage] = useState(1)
+  const [page, setPage] = useState<number>(1)
 
   const {data, isLoading} = usersApi.useFetchAllUsersQuery({page})
   const {responseData, totalPages} = {...data}
 
   const handleChangePage = (event: ChangeEvent<unknown>, value: number) => {
     setPage(value);
-  };
+  }
 
   useEffect(() => {
     dispatch(setLoading(isLoading))
-  }, [dispatch, isLoading, responseData])
+  }, [dispatch, isLoading])
 
   return (
     <Grid
@@ -43,11 +44,14 @@ export default function Users() {
           />
         </Grid>
       ))}
-      {totalPages && totalPages > 0 ?
+      <Container
+        fixed
+        sx={{pt: 4, justifyContent: 'center', display: 'flex'}}>
         <Pagination
           count={totalPages}
           page={page}
-          onChange={handleChangePage}/> : null}
+          onChange={handleChangePage}/>
+      </Container>
     </Grid>
   )
 }

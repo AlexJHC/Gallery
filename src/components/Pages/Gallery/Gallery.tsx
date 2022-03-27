@@ -21,7 +21,7 @@ export default function Gallery() {
 
   const {data: album} = usersApi.useFetchAlbumsQuery({})
 
-
+  console.log('Gallery')
   useEffect(() => {
     dispatch(setLoading(isLoading))
   }, [dispatch, isLoading, responseData])

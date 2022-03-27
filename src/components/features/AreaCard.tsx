@@ -4,7 +4,6 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import {useState} from 'react';
 
-
 type AreaCardPropsType = {
   username: string
   name: string
@@ -18,8 +17,7 @@ type AreaCardPropsType = {
   }
 }
 
-
-export default function AreaCard(
+export default React.memo( function AreaCard(
   {
     username,
     name,
@@ -46,6 +44,7 @@ export default function AreaCard(
   return (
     <Card sx={{maxWidth: 370}}>
       <iframe
+        title={`${username} google map location`}
         src={mapPath}
         srcDoc={loadingIframeText}
         width="300"
@@ -72,4 +71,4 @@ export default function AreaCard(
       </CardContent>
     </Card>
   );
-}
+})
