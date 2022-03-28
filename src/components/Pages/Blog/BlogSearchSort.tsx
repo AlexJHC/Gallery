@@ -14,21 +14,20 @@ type PropsBlogSearchSortType = {
   handleChange: (event: SelectChangeEvent) => void
 }
 
-export default function BlogSearchSort({
-                                         search,
-                                         handleTitleSearch,
-                                         handleClearSearch,
-                                         selectValue,
-                                         handleChange
-                                       }: PropsBlogSearchSortType) {
+export default React.memo(function BlogSearchSort({
+                                                    search,
+                                                    handleTitleSearch,
+                                                    handleClearSearch,
+                                                    selectValue,
+                                                    handleChange
+                                                  }: PropsBlogSearchSortType) {
   return (
     <Container fixed sx={{
-      minWidth: '100vw',
       pt: 3,
       display: 'grid',
       gap: 3,
       justifyContent: 'center',
-      gridTemplateColumns: {s:'1fr 1fr',md:'350px 350px'},
+      gridTemplateColumns: {s: '1fr 1fr', md: '350px 350px'},
     }}>
       <FormControl sx={{maxWidth: 350}}>
         <InputLabel htmlFor="Search">Search</InputLabel>
@@ -40,6 +39,8 @@ export default function BlogSearchSort({
           endAdornment={
             <InputAdornment position="end">
               <IconButton
+                disabled={search.length === 0}
+                onClick={handleClearSearch}
                 aria-label="toggle password visibility"
                 edge="end">
                 <HighlightOffIcon/>
@@ -47,16 +48,6 @@ export default function BlogSearchSort({
             </InputAdornment>}
           label="Search"
         />
-
-        {/*<IconButton*/}
-        {/*  disabled={search.length === 0}*/}
-        {/*  color="default"*/}
-        {/*  aria-label="delete search"*/}
-        {/*  component="button"*/}
-        {/*  onClick={handleClearSearch}>*/}
-        {/*  <HighlightOffIcon/>*/}
-        {/*</IconButton>*/}
-
       </FormControl>
       <FormControl sx={{maxWidth: 350}}>
         <InputLabel id="Sort">Sort</InputLabel>
@@ -78,4 +69,4 @@ export default function BlogSearchSort({
       </FormControl>
     </Container>
   )
-}
+})

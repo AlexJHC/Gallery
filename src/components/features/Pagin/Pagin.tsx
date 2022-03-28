@@ -13,7 +13,12 @@ export default React.memo(function Pagin({page, totalPages, handleChangePage}: P
   return (
     <Container
       fixed
-      sx={{pt: 4, justifyContent: 'center', display: 'flex'}}>
+      sx={{
+        pb: 3,
+        pt: 3,
+        justifyContent: 'center',
+        display: 'flex'
+      }}>
       {totalPages && totalPages > 0
         ? <Pagination
           count={totalPages}

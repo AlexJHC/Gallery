@@ -22,11 +22,11 @@ export default function Gallery() {
 
   const {data: albums, isLoading: albumLoading} = usersApi.useFetchAlbumsQuery({})
 
-  const GalleryIsLoading = isLoading && albumLoading
+  const galleryIsLoading = isLoading && albumLoading
 
   useEffect(() => {
-    dispatch(setLoading(GalleryIsLoading))
-  }, [dispatch, GalleryIsLoading])
+    dispatch(setLoading(galleryIsLoading))
+  }, [dispatch, galleryIsLoading])
 
   const handleChangePage = useCallback((event: ChangeEvent<unknown>, value: number) => {
     setPage(value);

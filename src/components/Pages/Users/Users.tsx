@@ -11,7 +11,7 @@ export default function Users() {
 
   const [page, setPage] = useState<number>(1)
 
-  const {data, isLoading} = usersApi.useFetchAllUsersQuery({page})
+  const {data, isLoading} = usersApi.useFetchAllUsersQuery({page,limit:3})
   const {responseData, totalPages} = {...data}
 
   const handleChangePage = useCallback((event: ChangeEvent<unknown>, value: number) => {

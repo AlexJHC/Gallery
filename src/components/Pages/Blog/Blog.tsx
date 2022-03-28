@@ -3,15 +3,11 @@ import {usersApi} from '../../../api/usersApi';
 import {setLoading} from '../../../store/slice/appSlice';
 import {useDispatch} from 'react-redux';
 import Grid from '@mui/material/Grid';
-import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import {FormControl, InputLabel, TextField} from '@mui/material';
-import IconButton from '@mui/material/IconButton';
-import MenuItem from '@mui/material/MenuItem';
-import Select, {SelectChangeEvent} from '@mui/material/Select';
+import {SelectChangeEvent} from '@mui/material/Select';
 import {AppDispatch} from '../../../store/store';
-import Container from '@mui/material/Container';
 import Pagin from '../../features/Pagin/Pagin';
 import BlogSearchSort from './BlogSearchSort';
+import BlogCard from './BlogCard';
 
 export default function Blog() {
 
@@ -31,6 +27,9 @@ export default function Blog() {
     search
   })
   const {responseData, totalPages} = {...data}
+
+  const {data: dataResponse, isLoading: userLoading} = usersApi.useFetchAllUsersQuery({})
+  const {responseData: usersResponse} = {...dataResponse}
 
   const handleTitleSearch = (e: any) => setSearch(e.target.value)
   const handleClearSearch = () => setSearch('')
@@ -67,13 +66,12 @@ export default function Blog() {
     setPage(value);
   }, [])
 
-  console.log(1)
-
+  const blogIsLoading = isLoading && userLoading
 
   useEffect(() => {
-    dispatch(setLoading(isLoading))
+    dispatch(setLoading(blogIsLoading))
     sortChanger(selectValue)
-  }, [dispatch, isLoading, responseData, selectValue])
+  }, [dispatch, blogIsLoading, selectValue])
 
   return (
     <>
@@ -90,10 +88,9 @@ export default function Blog() {
         alignItems="center"
         paddingTop={6}
         paddingBottom={6}>
-        {responseData && responseData.map(item =>
-          <Grid item key={item.id}>
-            <div>{item.title}</div>
-          </Grid>)}
+        <BlogCard
+          responseData={responseData}
+          usersResponse={usersResponse}/>
       </Grid>
       <Pagin
         page={page}

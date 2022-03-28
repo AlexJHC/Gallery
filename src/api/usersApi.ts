@@ -8,11 +8,11 @@ export const usersApi = createApi({
   }),
   endpoints: (build) => ({
     fetchAllUsers: build.query<ResponseMetaType<UserType[]>, PostsParamsType>({
-      query: ({page}) => ({
+      query: ({page,limit}) => ({
         url: `/users`,
         params: {
           _page: page,
-          _limit: 3,
+          _limit: limit,
         }
       }),
       transformResponse(responseData: UserType[], meta): Promise<ResponseMetaType<UserType[]>> | ResponseMetaType<UserType[]> {
@@ -29,12 +29,12 @@ export const usersApi = createApi({
           _sort: sort,
           _order: order,
           _page: page,
-          _limit: 5,
+          _limit: 6,
           q: search
         }
       }),
       transformResponse(responseData: PostType[], meta): Promise<ResponseMetaType<PostType[]>> | ResponseMetaType<PostType[]> {
-        const limitQueryPage = 5
+        const limitQueryPage = 6
         const totalPages = (meta && meta.response)
           && Math.ceil(Number(meta.response.headers.get('X-Total-Count')) / limitQueryPage)
         return {responseData, totalPages}
@@ -70,6 +70,7 @@ type PostsParamsType = {
   page?: number
   search?: string
   albumId?: number | string
+  limit?:number
 }
 export type ResponseMetaType<T> = {
   responseData: T
