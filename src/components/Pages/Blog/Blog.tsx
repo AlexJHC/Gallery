@@ -11,12 +11,13 @@ import Select, {SelectChangeEvent} from '@mui/material/Select';
 import {AppDispatch} from '../../../store/store';
 import Container from '@mui/material/Container';
 import Pagin from '../../features/Pagin/Pagin';
+import BlogSearchSort from './BlogSearchSort';
 
 export default function Blog() {
 
   const dispatch = useDispatch<AppDispatch>()
 
-  const [selectValue, setSelectValue] = useState('none');
+  const [selectValue, setSelectValue] = useState('');
   const [page, setPage] = useState(1)
 
   const [search, setSearch] = useState<string>('')
@@ -76,40 +77,12 @@ export default function Blog() {
 
   return (
     <>
-      <Container fixed>
-        <TextField
-          id="input-with-sx"
-          label="Search"
-          variant="standard"
-          value={search}
-          onChange={handleTitleSearch}/>
-        <IconButton
-          disabled={search.length === 0}
-          color="default"
-          aria-label="delete search"
-          component="button"
-          onClick={handleClearSearch}>
-          <HighlightOffIcon/>
-        </IconButton>
-        <FormControl sx={{m: 1, minWidth: 200}}>
-          <InputLabel id="demo-simple-select-autowidth-label">Sort</InputLabel>
-          <Select
-            labelId="demo-simple-select-autowidth-label"
-            id="demo-simple-select-autowidth"
-            value={selectValue}
-            onChange={handleChange}
-            autoWidth
-            label="Sort">
-            <MenuItem value='none'>
-              <em>none</em>
-            </MenuItem>
-            <MenuItem value='id-up'>id: 1 -10</MenuItem>
-            <MenuItem value='id-down'>id: 10 - 1</MenuItem>
-            <MenuItem value='title-up'>title: a - z</MenuItem>
-            <MenuItem value='title-down'>title: z - a</MenuItem>
-          </Select>
-        </FormControl>
-      </Container>
+      <BlogSearchSort
+        search={search}
+        handleClearSearch={handleClearSearch}
+        selectValue={selectValue}
+        handleChange={handleChange}
+        handleTitleSearch={handleTitleSearch}/>
       <Grid
         container
         spacing={{xs: 2, md: 4}}

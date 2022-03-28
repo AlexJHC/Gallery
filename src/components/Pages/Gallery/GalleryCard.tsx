@@ -38,7 +38,8 @@ export default function GalleryCard({albums, responseData}: PropsGalleryCardType
                   component="img"
                   height="200"
                   image={photo.thumbnailUrl}
-                  alt={photo.title}/>
+                  alt={photo.title}
+                  loading='lazy'/>
                 <CardContent>
                   <Typography
                     gutterBottom
@@ -71,6 +72,7 @@ export default function GalleryCard({albums, responseData}: PropsGalleryCardType
                   }}
                   alt={photo.title}
                   src={photo.url}
+                  loading='lazy'
                 />
               </DialogContent>
               <DialogActions>
