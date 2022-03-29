@@ -1,5 +1,5 @@
 <h1 position='center'>Jsonplaceholder REST API PRoject 📖<h1>
-  <p>API<a href="https://https://jsonplaceholder.typicode.com" target="_blank">{JSON} Placeholder</a><p>
+  <p>API <a href="https://https://jsonplaceholder.typicode.com" target="_blank">{JSON} Placeholder</a><p>
   <h3 position='center'>Tehnology: CRA, Typescript, Redux-toolkit, RTK Query<h3>
   <h4 position='center'>Blog<h4>
   <p>Displays a list of all posts<p>
