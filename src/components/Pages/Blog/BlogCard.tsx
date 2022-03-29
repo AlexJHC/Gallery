@@ -21,14 +21,21 @@ export default React.memo(function BlogCard({
           <Grid item key={post.id}>
             <Card sx={{maxWidth: 345}}>
               <CardContent>
-                <Typography gutterBottom variant="h6" component="div">
+                <Typography
+                  gutterBottom
+                  variant="h6"
+                  component="div">
                   {post.title}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography
+                  variant="body2"
+                  color="text.secondary">
                   {post.body}
                 </Typography>
                 <hr/>
-                <Typography gutterBottom component="div">
+                <Typography
+                  gutterBottom
+                  component="div">
                   {usersResponse
                     ? usersResponse.filter(user =>
                       user.id === post.userId)[0].username

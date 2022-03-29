@@ -24,7 +24,6 @@ export default function GalleryCard({albums, responseData}: PropsGalleryCardType
     setOpen(false);
   };
 
-  console.log('GalleryCard')
   return (
     <>
       {responseData &&

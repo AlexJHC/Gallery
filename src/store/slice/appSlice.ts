@@ -2,7 +2,7 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 
 const initialAppState: initialAppStateType = {
   isLoading: true,
-  isError: 'Error',
+  isError: false,
 }
 
 const appSlice = createSlice({
@@ -12,15 +12,15 @@ const appSlice = createSlice({
     setLoading(state, action: PayloadAction<boolean>) {
       state.isLoading = action.payload
     },
-    setError(state, action: PayloadAction<string>) {
+    setError(state, action: PayloadAction<boolean>) {
       state.isError = action.payload
     },
   }
 })
 
-type initialAppStateType = {
+export type initialAppStateType = {
   isLoading: boolean
-  isError: string
+  isError: boolean
 }
 
 export const {setLoading, setError} = appSlice.actions

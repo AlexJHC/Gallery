@@ -9,7 +9,13 @@ type PaginType = {
 
 }
 
-export default React.memo(function Pagin({page, totalPages, handleChangePage}: PaginType) {
+export default React.memo(function Pagin({
+                                           page,
+                                           totalPages,
+                                           handleChangePage
+                                         }: PaginType) {
+
+  const isPaginationPagesExist = totalPages && totalPages > 0
   return (
     <Container
       fixed
@@ -19,7 +25,7 @@ export default React.memo(function Pagin({page, totalPages, handleChangePage}: P
         justifyContent: 'center',
         display: 'flex'
       }}>
-      {totalPages && totalPages > 0
+      {isPaginationPagesExist
         ? <Pagination
           count={totalPages}
           page={page}

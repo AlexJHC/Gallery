@@ -6,9 +6,10 @@ import MenuItem from '@mui/material/MenuItem';
 import Container from '@mui/material/Container';
 import React, {ChangeEvent} from 'react';
 import {ActionFilterType} from '../../../store/slice/blogSlice';
+
 type PropsBlogSearchSortType = {
   search: string
-  handleTitleSearch: (value:string) => void
+  handleTitleSearch: (value: string) => void
   handleClearSearch: () => void
   handleFilter: (filter: ActionFilterType) => void
   handleResetPage: () => void
@@ -34,7 +35,6 @@ export default React.memo(function BlogSearchSort({
 
   const disableDeleteButton = search.length === 0
 
-  console.log('BlogSearch')
   return (
     <Container fixed sx={{
       pt: 3,

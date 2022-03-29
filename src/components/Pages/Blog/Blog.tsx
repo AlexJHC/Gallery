@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useCallback, useEffect, useState} from 'react';
 import {dataApi} from '../../../api/dataApi';
-import {setLoading} from '../../../store/slice/appSlice';
+import {setError, setLoading} from '../../../store/slice/appSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import Grid from '@mui/material/Grid';
 import {RootState} from '../../../store/store';
@@ -17,7 +17,7 @@ export default function Blog() {
 
   const [page, setPage] = useState(1)
 
-  const {data, isLoading} = dataApi.useFetchAllPostsQuery({
+  const {data, isLoading, isError} = dataApi.useFetchAllPostsQuery({
     sort,
     order,
     page,
@@ -48,12 +48,11 @@ export default function Blog() {
     dispatch(setFilter(filter))
   }, [dispatch])
 
-
   useEffect(() => {
     dispatch(setLoading(blogIsLoading))
-  }, [dispatch, blogIsLoading,])
+    dispatch(setError(isError))
+  }, [dispatch, blogIsLoading, isError])
 
-  console.log('blog')
   return (
     <>
       <BlogSearchSort

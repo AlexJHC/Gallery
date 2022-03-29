@@ -24,14 +24,50 @@ const ResponsiveAppBar = () => {
     setAnchorElNav(null);
   };
 
+  const mapPagesFomMenu = pages.map((page) =>
+    (<Link
+        to={page.toLocaleLowerCase()}
+        key={page}
+        style={{textDecoration: 'none'}}>
+        <MenuItem
+          key={page}
+          onClick={handleCloseNavMenu}>
+          <Typography
+            textAlign="center">
+            {page}
+          </Typography>
+        </MenuItem>
+      </Link>
+    ))
+
+  const mapPagesForSmallMenu = pages.map((page) =>
+    (<Link
+        to={page.toLocaleLowerCase()}
+        key={page}
+        style={{textDecoration: 'none'}}>
+        <Button
+          onClick={handleCloseNavMenu}
+          sx={{my: 2, color: 'white', display: 'block'}}>
+          {page}
+        </Button>
+      </Link>
+    ))
+
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <Box sx={{flexGrow: 1, display: {xs: 'flex', md: 'none'}}}>
+    <AppBar
+      position="static">
+      <Container
+        maxWidth="xl">
+        <Toolbar
+          disableGutters>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: {xs: 'flex', md: 'none'}
+            }}>
             <IconButton
               size="large"
-              aria-label="account of current user"
+              aria-label="app menu"
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
@@ -55,30 +91,16 @@ const ResponsiveAppBar = () => {
               onClose={handleCloseNavMenu}
               sx={{
                 display: {xs: 'block', md: 'none'},
-              }}
-            >
-              {pages.map((page) => (
-                <Link to={page.toLocaleLowerCase()}
-                      key={page} style={{textDecoration: 'none'}}>
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-                </Link>
-              ))}
+              }}>
+              {mapPagesFomMenu}
             </Menu>
           </Box>
-          <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}}>
-            {pages.map((page) => (
-              <Link
-                to={page.toLocaleLowerCase()}
-                key={page} style={{textDecoration: 'none'}}>
-                <Button
-                  onClick={handleCloseNavMenu}
-                  sx={{my: 2, color: 'white', display: 'block'}}>
-                  {page}
-                </Button>
-              </Link>
-            ))}
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: {xs: 'none', md: 'flex'}
+            }}>
+            {mapPagesForSmallMenu}
           </Box>
         </Toolbar>
       </Container>

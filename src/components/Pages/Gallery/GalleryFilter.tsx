@@ -15,7 +15,6 @@ export default React.memo(function GalleryFilter({
                                                    handleChangeFilter,
                                                    albums
                                                  }: PropsGalleryFilterType) {
-
   return (
     <FormControl
       sx={{mt: 2, ml: {xs: 4, md: 5, xl: 7}, minWidth: 300}}>
