@@ -1,6 +1,6 @@
 {
-  "short_name": "Test Project",
-  "name": "Create React Test Project",
+  "short_name": "Jsonplaceholder",
+  "name": "Create React Jsonplaceholder Rest api App",
   "icons": [
     {
       "src": "favicon.ico",
