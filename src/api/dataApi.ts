@@ -1,8 +1,8 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/dist/query/react';
 
-export const usersApi = createApi({
+export const dataApi = createApi({
 
-  reducerPath: 'usersApi',
+  reducerPath: 'dataApi',
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://jsonplaceholder.typicode.com'
   }),
@@ -30,7 +30,7 @@ export const usersApi = createApi({
           _order: order,
           _page: page,
           _limit: 6,
-          q: search
+          body_like: search
         }
       }),
       transformResponse(responseData: PostType[], meta): Promise<ResponseMetaType<PostType[]>> | ResponseMetaType<PostType[]> {

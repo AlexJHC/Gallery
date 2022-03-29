@@ -1,5 +1,5 @@
 import {useDispatch} from 'react-redux';
-import {usersApi} from '../../../api/usersApi';
+import {dataApi} from '../../../api/dataApi';
 import React, {ChangeEvent, useCallback, useEffect, useState} from 'react';
 import {setLoading} from '../../../store/slice/appSlice';
 import Grid from '@mui/material/Grid';
@@ -11,7 +11,7 @@ export default function Users() {
 
   const [page, setPage] = useState<number>(1)
 
-  const {data, isLoading} = usersApi.useFetchAllUsersQuery({page,limit:3})
+  const {data, isLoading} = dataApi.useFetchAllUsersQuery({page,limit:3})
   const {responseData, totalPages} = {...data}
 
   const handleChangePage = useCallback((event: ChangeEvent<unknown>, value: number) => {

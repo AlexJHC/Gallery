@@ -12,21 +12,27 @@ const blogSlice = createSlice({
   name: 'Blog',
   initialState: initialBlogState,
   reducers: {
-    setFilter(state, action: PayloadAction<FilterType>) {
-      switch (action.type) {
-        case 'Blog/ID_UP':
-        case 'Blog/ID_DOWN':
-        case 'Blog/TITLE_UP':
-        case 'Blog/TITLE_DOWN':
-          return {...state, filter: action.payload}
+    setFilter(state, action: PayloadAction<ActionFilterType>) {
+      switch (action.payload) {
+        case 'BLOG/FILTER_ID_UP':
+          return {...state, filter: {sort: 'userId', order: 'asc'}}
+        case 'BLOG/FILTER_ID_DOWN':
+          return {...state, filter: {sort: 'userId', order: 'desc'}}
+        case 'BLOG/FILTER_TITLE_UP':
+          return {...state, filter: {sort: 'title', order: 'asc'}}
+        case 'BLOG/FILTER_TITLE_DOWN':
+          return {...state, filter: {sort: 'title', order: 'desc'}}
         default:
-          return state
+          return {...state, filter: {sort: '', order: ''}}
       }
     },
+    setSearch(state, action: PayloadAction<string>) {
+      state.search = action.payload
+    }
   }
 })
 
-type InitialAppStateType = {
+export type InitialAppStateType = {
   search: string
   filter: FilterType
 }
@@ -36,5 +42,11 @@ type FilterType = {
   order: string
 }
 
-export const {setFilter} = blogSlice.actions
+export type ActionFilterType = 'BLOG/FILTER_ID_UP'
+  | 'BLOG/FILTER_ID_DOWN'
+  | 'BLOG/FILTER_TITLE_UP'
+  | 'BLOG/FILTER_TITLE_DOWN'
+  | ''
+
+export const {setFilter, setSearch} = blogSlice.actions
 export default blogSlice.reducer

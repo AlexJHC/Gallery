@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import React from 'react';
-import {AlbumType, PhotoType} from '../../../api/usersApi';
+import {AlbumType, PhotoType} from '../../../api/dataApi';
 
 type PropsGalleryCardType = {
   albums: AlbumType[] | undefined

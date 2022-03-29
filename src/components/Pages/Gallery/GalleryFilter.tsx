@@ -2,7 +2,7 @@ import {FormControl, InputLabel, Select} from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import React from 'react';
 import {SelectChangeEvent} from '@mui/material/Select';
-import {AlbumType} from '../../../api/usersApi';
+import {AlbumType} from '../../../api/dataApi';
 
 type PropsGalleryFilterType = {
   albumId: string

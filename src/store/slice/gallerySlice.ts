@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
-import {AlbumType, PhotoType} from '../../api/usersApi';
+import {AlbumType, PhotoType} from '../../api/dataApi';
 
 const initialGalleryState: initialAppStateType = {
   albums: [],
