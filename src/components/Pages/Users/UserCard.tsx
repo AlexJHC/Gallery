@@ -17,7 +17,7 @@ type AreaCardPropsType = {
   }
 }
 
-export default React.memo( function AreaCard(
+export default React.memo( function UserCard(
   {
     username,
     name,

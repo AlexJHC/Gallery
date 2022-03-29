@@ -3,7 +3,7 @@ import {dataApi} from '../../../api/dataApi';
 import React, {ChangeEvent, useCallback, useEffect, useState} from 'react';
 import {setLoading} from '../../../store/slice/appSlice';
 import Grid from '@mui/material/Grid';
-import AreaCard from '../../features/AreaCard';
+import AreaCard from './UserCard';
 import Pagin from '../../features/Pagin/Pagin';
 
 export default function Users() {
