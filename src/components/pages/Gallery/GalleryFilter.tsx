@@ -23,7 +23,7 @@ export default React.memo(function GalleryFilter({
       flex: 1,
       justifyContent: 'center',
     }}>
-      <FormControl sx={{maxWidth: 350}}>
+      <FormControl sx={{width: {xs: 300, md: 350}}}>
         <InputLabel id="AlbumFilter">Album Filter</InputLabel>
         <Select
           id="AlbumFilter"

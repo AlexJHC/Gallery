@@ -26,7 +26,7 @@ export default React.memo(function BlogSearchSort({
     handleFilter(event.target.value as ActionFilterType)
   }
 
-  const handleClearSearch = () => (setSearch(''))
+  const handleClearSearch = () => setSearch('')
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value)
