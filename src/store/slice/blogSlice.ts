@@ -5,7 +5,8 @@ const initialBlogState: InitialAppStateType = {
   filter: {
     sort: '',
     order: ''
-  }
+  },
+  currentPage: 1
 }
 
 const blogSlice = createSlice({
@@ -28,6 +29,9 @@ const blogSlice = createSlice({
     },
     setSearch(state, action: PayloadAction<string>) {
       state.search = action.payload
+    },
+    setCurrentPage(state, action: PayloadAction<number>) {
+      state.currentPage = action.payload
     }
   }
 })
@@ -35,6 +39,7 @@ const blogSlice = createSlice({
 export type InitialAppStateType = {
   search: string
   filter: FilterType
+  currentPage: number
 }
 
 type FilterType = {
@@ -48,5 +53,5 @@ export type ActionFilterType = 'BLOG/FILTER_ID_UP'
   | 'BLOG/FILTER_TITLE_DOWN'
   | ''
 
-export const {setFilter, setSearch} = blogSlice.actions
+export const {setFilter, setSearch, setCurrentPage} = blogSlice.actions
 export default blogSlice.reducer

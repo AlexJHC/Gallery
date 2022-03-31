@@ -20,7 +20,11 @@ export default function Gallery() {
   const {data, isFetching, isError} = dataApi.useFetchPhotosQuery({albumId, page})
   const {responseData, totalPages} = {...data}
 
-  const {data: albums, isFetching: albumFetching, isError: albumError} = dataApi.useFetchAlbumsQuery({})
+  const {
+    data: albums,
+    isFetching: albumFetching,
+    isError: albumError
+  } = dataApi.useFetchAlbumsQuery({})
 
   const handleChangePage = useCallback((event: ChangeEvent<unknown>, value: number) => {
     setPage(value);

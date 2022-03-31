@@ -12,17 +12,17 @@ type PropsBlogSearchSortType = {
   handleTitleSearch: (value: string) => void
   handleFilter: (filter: ActionFilterType) => void
   handleResetPage: () => void
-  value: string
+  searchValue: string
 }
 
 export default React.memo(function BlogSearchSort({
-                                                    value,
+                                                    searchValue,
                                                     handleTitleSearch,
                                                     handleFilter,
                                                     handleResetPage
                                                   }: PropsBlogSearchSortType) {
 
-  const [search, setSearch] = useState<string>(value)
+  const [search, setSearch] = useState<string>(searchValue)
 
   const handleSelect = (event: SelectChangeEvent) => {
     handleFilter(event.target.value as ActionFilterType)
@@ -32,12 +32,12 @@ export default React.memo(function BlogSearchSort({
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value)
+    handleResetPage()
   }
 
   useDebounce(
     () => {
       handleTitleSearch(search)
-      handleResetPage()
     }, 800, [search])
 
   const disableDeleteButton = search.length === 0
