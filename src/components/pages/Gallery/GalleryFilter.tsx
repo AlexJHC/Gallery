@@ -3,6 +3,7 @@ import MenuItem from '@mui/material/MenuItem';
 import React from 'react';
 import {SelectChangeEvent} from '@mui/material/Select';
 import {AlbumType} from '../../../api/dataApi';
+import Container from '@mui/material/Container';
 
 type PropsGalleryFilterType = {
   albumId: string
@@ -16,25 +17,31 @@ export default React.memo(function GalleryFilter({
                                                    albums
                                                  }: PropsGalleryFilterType) {
   return (
-    <FormControl
-      sx={{mt: 2, ml: {xs: 1, md: 5, xl: 7}, width: 340}}>
-      <InputLabel id="AlbumFilter">Album Filter</InputLabel>
-      <Select
-        id="AlbumFilter"
-        value={albumId}
-        onChange={handleChangeFilter}
-        label="Album Filter">
-        <MenuItem value="">
-          <em>None</em>
-        </MenuItem>
-        {albums &&
-          albums.map(album =>
-            <MenuItem
-              key={album.id}
-              value={album.id}>
-              {album.title}
-            </MenuItem>)}
-      </Select>
-    </FormControl>
+    <Container fixed sx={{
+      pt: 3,
+      display: 'flex',
+      flex: 1,
+      justifyContent: 'center',
+    }}>
+      <FormControl sx={{maxWidth: 350}}>
+        <InputLabel id="AlbumFilter">Album Filter</InputLabel>
+        <Select
+          id="AlbumFilter"
+          value={albumId}
+          onChange={handleChangeFilter}
+          label="Album Filter">
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          {albums &&
+            albums.map(album =>
+              <MenuItem
+                key={album.id}
+                value={album.id}>
+                {album.title}
+              </MenuItem>)}
+        </Select>
+      </FormControl>
+    </Container>
   )
 })
