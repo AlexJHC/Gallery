@@ -25,7 +25,7 @@ const blogSlice = createSlice({
         case 'BLOG/FILTER_TITLE_DOWN':
           return {...state, filter: {sort: 'title', order: 'desc'}, filterValue: action.payload}
         default:
-          return {...state, filter: {sort: '', order: ''}}
+          return {...state, filter: {sort: '', order: ''}, filterValue: ''}
       }
     },
     setSearch(state, action: PayloadAction<string>) {
