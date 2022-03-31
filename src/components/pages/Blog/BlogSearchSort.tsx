@@ -13,9 +13,11 @@ type PropsBlogSearchSortType = {
   handleFilter: (filter: ActionFilterType) => void
   handleResetPage: () => void
   searchValue: string
+  filterValue: ActionFilterType
 }
 
 export default React.memo(function BlogSearchSort({
+                                                    filterValue,
                                                     searchValue,
                                                     handleTitleSearch,
                                                     handleFilter,
@@ -26,9 +28,13 @@ export default React.memo(function BlogSearchSort({
 
   const handleSelect = (event: SelectChangeEvent) => {
     handleFilter(event.target.value as ActionFilterType)
+    handleResetPage()
   }
 
-  const handleClearSearch = () => setSearch('')
+  const handleClearSearch = () => {
+    setSearch('')
+    handleResetPage()
+  }
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value)
@@ -74,7 +80,7 @@ export default React.memo(function BlogSearchSort({
         <Select
           variant='outlined'
           labelId="Sort"
-          defaultValue=""
+          value={filterValue}
           onChange={handleSelect}
           autoWidth
           label="Sort">

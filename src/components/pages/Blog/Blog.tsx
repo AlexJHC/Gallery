@@ -19,7 +19,12 @@ import Error from '../../features/Alert/Error';
 export default function Blog() {
 
   const dispatch = useDispatch()
-  const {search, filter, currentPage: page} = useSelector<RootState, InitialAppStateType>(state => state.blog)
+  const {
+    search,
+    filter,
+    currentPage: page,
+    filterValue
+  } = useSelector<RootState, InitialAppStateType>(state => state.blog)
   const {order, sort} = {...filter}
 
   const {data, isFetching, isError} = dataApi.useFetchAllPostsQuery({
@@ -54,6 +59,7 @@ export default function Blog() {
   return (
     <>
       <BlogSearchSort
+        filterValue={filterValue}
         handleResetPage={handleResetPage}
         searchValue={search}
         handleTitleSearch={handleTitleSearch}
