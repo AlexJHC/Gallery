@@ -56,7 +56,6 @@ export default function Blog() {
   return (
     <>
       <BlogSearchSort
-        search={search}
         handleClearSearch={handleClearSearch}
         handleTitleSearch={handleTitleSearch}
         handleFilter={handleFilter}

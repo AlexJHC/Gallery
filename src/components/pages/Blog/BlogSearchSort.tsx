@@ -4,11 +4,11 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import Select, {SelectChangeEvent} from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import Container from '@mui/material/Container';
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import {ActionFilterType} from '../../../store/slice/blogSlice';
+import {useDebounce} from '../../features/Debounce/useDebounce';
 
 type PropsBlogSearchSortType = {
-  search: string
   handleTitleSearch: (value: string) => void
   handleClearSearch: () => void
   handleFilter: (filter: ActionFilterType) => void
@@ -16,22 +16,27 @@ type PropsBlogSearchSortType = {
 }
 
 export default React.memo(function BlogSearchSort({
-                                                    search,
                                                     handleTitleSearch,
                                                     handleClearSearch,
                                                     handleFilter,
                                                     handleResetPage
                                                   }: PropsBlogSearchSortType) {
 
+  const [search, setSearch] = useState<string>('')
 
   const handleSelect = (event: SelectChangeEvent) => {
     handleFilter(event.target.value as ActionFilterType)
   };
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
-    handleTitleSearch(e.target.value)
-    handleResetPage()
+    setSearch(e.target.value)
   }
+
+  useDebounce(
+    () => {
+      handleTitleSearch(search)
+      handleResetPage()
+    }, 800, [search])
 
   const disableDeleteButton = search.length === 0
 
