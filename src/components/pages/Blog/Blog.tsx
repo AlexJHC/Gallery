@@ -31,9 +31,6 @@ export default function Blog() {
   const handleTitleSearch = useCallback((value: string) =>
     dispatch(setSearch(value)), [dispatch])
 
-  const handleClearSearch = useCallback(() =>
-    dispatch(setSearch('')), [dispatch])
-
   const handleChangePage = useCallback((event: ChangeEvent<unknown>, value: number) => {
     setPage(value);
   }, [])
@@ -56,7 +53,6 @@ export default function Blog() {
   return (
     <>
       <BlogSearchSort
-        handleClearSearch={handleClearSearch}
         handleTitleSearch={handleTitleSearch}
         handleFilter={handleFilter}
         handleResetPage={handleResetPage}/>

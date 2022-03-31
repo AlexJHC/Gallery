@@ -10,14 +10,12 @@ import {useDebounce} from '../../features/Debounce/useDebounce';
 
 type PropsBlogSearchSortType = {
   handleTitleSearch: (value: string) => void
-  handleClearSearch: () => void
   handleFilter: (filter: ActionFilterType) => void
   handleResetPage: () => void
 }
 
 export default React.memo(function BlogSearchSort({
                                                     handleTitleSearch,
-                                                    handleClearSearch,
                                                     handleFilter,
                                                     handleResetPage
                                                   }: PropsBlogSearchSortType) {
@@ -26,7 +24,9 @@ export default React.memo(function BlogSearchSort({
 
   const handleSelect = (event: SelectChangeEvent) => {
     handleFilter(event.target.value as ActionFilterType)
-  };
+  }
+
+  const handleClearSearch = () => (setSearch(''))
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value)
