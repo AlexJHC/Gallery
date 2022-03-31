@@ -12,15 +12,17 @@ type PropsBlogSearchSortType = {
   handleTitleSearch: (value: string) => void
   handleFilter: (filter: ActionFilterType) => void
   handleResetPage: () => void
+  value: string
 }
 
 export default React.memo(function BlogSearchSort({
+                                                    value,
                                                     handleTitleSearch,
                                                     handleFilter,
                                                     handleResetPage
                                                   }: PropsBlogSearchSortType) {
 
-  const [search, setSearch] = useState<string>('')
+  const [search, setSearch] = useState<string>(value)
 
   const handleSelect = (event: SelectChangeEvent) => {
     handleFilter(event.target.value as ActionFilterType)

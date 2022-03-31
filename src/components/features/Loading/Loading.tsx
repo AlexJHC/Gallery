@@ -1,9 +1,11 @@
-import style from './Loading.module.css'
+import Box from '@mui/material/Box';
+import React from 'react';
+import LinearProgress from '@mui/material/LinearProgress';
 
 export default function Loading() {
   return (
-    <div className={style.container}>
-      <div className={style.ring}/>
-    </div>
+    <Box sx={{width: '100%', color: 'black'}}>
+      <LinearProgress color={'inherit'}/>
+    </Box>
   )
 }

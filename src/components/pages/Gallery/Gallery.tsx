@@ -1,12 +1,12 @@
 import {dataApi} from '../../../api/dataApi';
-import React, {ChangeEvent, useCallback, useEffect, useState} from 'react';
-import {setError, setLoading} from '../../../store/slice/appSlice';
+import React, {ChangeEvent, useCallback, useState} from 'react';
 import {useDispatch} from 'react-redux';
 import Grid from '@mui/material/Grid';
 import Pagin from '../../features/Pagin/Pagin';
 import {SelectChangeEvent} from '@mui/material/Select';
 import GalleryFilter from './GalleryFilter';
 import GalleryCard from './GalleryCard';
+import Loading from '../../features/Loading/Loading';
 
 export default function Gallery() {
 
@@ -16,12 +16,10 @@ export default function Gallery() {
   // AlbumID from select for AlbumFilter
   const [albumId, setAlbumId] = useState<string>('')
 
-  const {data, isLoading, isError} = dataApi.useFetchPhotosQuery({albumId, page})
+  const {data, isFetching, isError} = dataApi.useFetchPhotosQuery({albumId, page})
   const {responseData, totalPages} = {...data}
 
-  const {data: albums, isLoading: albumLoading} = dataApi.useFetchAlbumsQuery({})
-
-  const galleryIsLoading = isLoading && albumLoading
+  const {data: albums, isFetching: albumFetching} = dataApi.useFetchAlbumsQuery({})
 
   const handleChangePage = useCallback((event: ChangeEvent<unknown>, value: number) => {
     setPage(value);
@@ -32,10 +30,7 @@ export default function Gallery() {
     setPage(1)
   }, [])
 
-  useEffect(() => {
-    dispatch(setLoading(galleryIsLoading))
-    dispatch(setError(isError))
-  }, [dispatch, galleryIsLoading, isError])
+  if (isFetching || albumFetching) return <Loading/>
 
   return (
     <>
