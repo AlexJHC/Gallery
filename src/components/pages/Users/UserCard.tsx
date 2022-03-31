@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {useState} from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
@@ -28,29 +27,17 @@ export default React.memo( function UserCard(
     location,
   }: AreaCardPropsType) {
 
-  const [iFrameLoading, setIframeLoading] = useState<boolean>(true)
-
-  const handleIframeLoading = () => {
-    setIframeLoading(false)
-  }
-
   const mapPath =
     `https://maps.google.com/maps?q=${location.lat},${location.lng}&z=2&output=embed`
-
-  const loadingIframeText = iFrameLoading
-    ? `loading...`
-    : undefined
 
   return (
     <Card sx={{maxWidth: 370}}>
       <iframe
         title={`${username} google map location`}
         src={mapPath}
-        srcDoc={loadingIframeText}
         width="300"
         height="350"
         loading='lazy'
-        onLoad={handleIframeLoading}
         frameBorder="0">
       </iframe>
       <CardContent>
