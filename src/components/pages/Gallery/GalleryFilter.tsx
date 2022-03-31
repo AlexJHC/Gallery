@@ -17,7 +17,7 @@ export default React.memo(function GalleryFilter({
                                                  }: PropsGalleryFilterType) {
   return (
     <FormControl
-      sx={{mt: 2, ml: {xs: 4, md: 5, xl: 7}, minWidth: 300}}>
+      sx={{mt: 2, ml: {xs: 4, md: 5, xl: 7}, maxWidth: 350}}>
       <InputLabel id="AlbumFilter">Album Filter</InputLabel>
       <Select
         id="AlbumFilter"

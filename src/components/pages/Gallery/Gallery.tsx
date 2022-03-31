@@ -29,6 +29,7 @@ export default function Gallery() {
 
   const handleChangeFilter = useCallback((event: SelectChangeEvent) => {
     setAlbumId(event.target.value);
+    setPage(1)
   }, [])
 
   useEffect(() => {
