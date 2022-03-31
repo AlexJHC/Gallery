@@ -8,6 +8,7 @@ import BlogSearchSort from './BlogSearchSort';
 import BlogCard from './BlogCard';
 import {ActionFilterType, InitialAppStateType, setFilter, setSearch} from '../../../store/slice/blogSlice';
 import Loading from '../../features/Loading/Loading';
+import Error from '../../features/Alert/Error';
 
 export default function Blog() {
 
@@ -25,7 +26,7 @@ export default function Blog() {
   })
   const {responseData, totalPages} = {...data}
 
-  const {data: dataResponse, isFetching: blogFetching} = dataApi.useFetchAllUsersQuery({})
+  const {data: dataResponse, isFetching: blogFetching, isError: blogError} = dataApi.useFetchAllUsersQuery({})
   const {responseData: usersResponse} = {...dataResponse}
 
   const handleTitleSearch = useCallback((value: string) =>
@@ -43,6 +44,7 @@ export default function Blog() {
     dispatch(setFilter(filter))
   }, [dispatch])
 
+  if (isError || blogError) return <Error/>
   if (isFetching || blogFetching) return <Loading/>
 
   return (

@@ -8,7 +8,7 @@ export const dataApi = createApi({
   }),
   endpoints: (build) => ({
     fetchAllUsers: build.query<ResponseMetaType<UserType[]>, PostsParamsType>({
-      query: ({page,limit}) => ({
+      query: ({page, limit}) => ({
         url: `/users`,
         params: {
           _page: page,
@@ -46,7 +46,7 @@ export const dataApi = createApi({
         params: {
           _page: page,
           _limit: 10,
-          albumId_like:albumId
+          albumId_like: albumId
         }
       }),
       transformResponse(responseData: PhotoType[], meta): Promise<ResponseMetaType<PhotoType[]>> | ResponseMetaType<PhotoType[]> {
@@ -70,7 +70,7 @@ type PostsParamsType = {
   page?: number
   search?: string
   albumId?: number | string
-  limit?:number
+  limit?: number
 }
 export type ResponseMetaType<T> = {
   responseData: T

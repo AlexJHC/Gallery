@@ -7,6 +7,7 @@ import {SelectChangeEvent} from '@mui/material/Select';
 import GalleryFilter from './GalleryFilter';
 import GalleryCard from './GalleryCard';
 import Loading from '../../features/Loading/Loading';
+import Error from '../../features/Alert/Error';
 
 export default function Gallery() {
 
@@ -19,7 +20,7 @@ export default function Gallery() {
   const {data, isFetching, isError} = dataApi.useFetchPhotosQuery({albumId, page})
   const {responseData, totalPages} = {...data}
 
-  const {data: albums, isFetching: albumFetching} = dataApi.useFetchAlbumsQuery({})
+  const {data: albums, isFetching: albumFetching, isError: albumError} = dataApi.useFetchAlbumsQuery({})
 
   const handleChangePage = useCallback((event: ChangeEvent<unknown>, value: number) => {
     setPage(value);
@@ -30,6 +31,7 @@ export default function Gallery() {
     setPage(1)
   }, [])
 
+  if (isError || albumError) return <Error/>
   if (isFetching || albumFetching) return <Loading/>
 
   return (

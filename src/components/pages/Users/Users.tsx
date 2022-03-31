@@ -5,6 +5,7 @@ import Grid from '@mui/material/Grid';
 import AreaCard from './UserCard';
 import Pagin from '../../features/Pagin/Pagin';
 import Loading from '../../features/Loading/Loading';
+import Error from '../../features/Alert/Error';
 
 export default function Users() {
   const dispatch = useDispatch()
@@ -18,6 +19,7 @@ export default function Users() {
     setPage(value);
   }, [])
 
+  if (isError) return <Error/>
   if (isFetching) return <Loading/>
 
     return (
