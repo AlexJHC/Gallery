@@ -20,13 +20,14 @@ export default function Gallery() {
   } = useSelector<RootState, InitialGalleryStateType>(state => state.gallery)
 
 
-  const {data, isFetching, isError} = dataApi.useFetchPhotosQuery({albumId, page})
+  const {data, isFetching, isError, isLoading} = dataApi.useFetchPhotosQuery({albumId, page})
   const {responseData, totalPages} = {...data}
 
   const {
     data: albums,
     isFetching: albumFetching,
-    isError: albumError
+    isError: albumError,
+    isLoading: albumLoading
   } = dataApi.useFetchAlbumsQuery({})
 
   const handleChangePage = useCallback((event: ChangeEvent<unknown>, value: number) => {
@@ -38,29 +39,31 @@ export default function Gallery() {
   }, [dispatch])
 
   if (isError || albumError) return <Error/>
-  if (isFetching || albumFetching) return <Loading/>
+  if (isLoading || albumLoading) return <Loading/>
 
   return (
     <>
       <GalleryFilter
+        isFetching={(isFetching || albumFetching)}
         albums={albums}
         albumId={albumId}
         handleChangeFilter={handleChangeFilter}/>
-      <Grid
-        container
-        spacing={{xs: 4, md: 6}}
-        justifyContent='center'
-        alignItems='self-start'
-        paddingTop={6}
-        paddingBottom={6}>
-        <GalleryCard
-          albums={albums}
-          responseData={responseData}/>
-        <Pagin
-          page={page}
-          totalPages={totalPages}
-          handleChangePage={handleChangePage}/>
-      </Grid>
+      {(!isFetching && !albumFetching) &&
+        <Grid
+          container
+          spacing={{xs: 4, md: 6}}
+          justifyContent='center'
+          alignItems='self-start'
+          paddingTop={6}
+          paddingBottom={6}>
+          <GalleryCard
+            albums={albums}
+            responseData={responseData}/>
+          <Pagin
+            page={page}
+            totalPages={totalPages}
+            handleChangePage={handleChangePage}/>
+        </Grid>}
     </>
   )
 }
