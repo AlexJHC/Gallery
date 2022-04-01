@@ -25,18 +25,20 @@ export default function Users() {
   if (isFetching) return <Loading/>
 
   return (
-    <Grid
-      container
-      spacing={{xs: 4, md: 6}}
-      justifyContent='center'
-      alignItems='self-start'
-      paddingTop={6}
-      paddingBottom={6}>
-      <UserCard users={responseData}/>
+    <>
+      <Grid
+        container
+        spacing={{xs: 4, md: 6}}
+        justifyContent='center'
+        alignItems='self-start'
+        paddingTop={6}
+        paddingBottom={6}>
+        <UserCard users={responseData}/>
+      </Grid>
       <Pagin
         page={page}
         totalPages={totalPages}
         handleChangePage={handleChangePage}/>
-    </Grid>
+    </>
   )
 }

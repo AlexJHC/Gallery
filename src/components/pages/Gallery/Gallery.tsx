@@ -49,21 +49,24 @@ export default function Gallery() {
         albumId={albumId}
         handleChangeFilter={handleChangeFilter}/>
       {(!isFetching && !albumFetching) &&
-        <Grid
-          container
-          spacing={{xs: 4, md: 6}}
-          justifyContent='center'
-          alignItems='self-start'
-          paddingTop={6}
-          paddingBottom={6}>
-          <GalleryCard
-            albums={albums}
-            responseData={responseData}/>
+        <>
+          <Grid
+            container
+            spacing={{xs: 4, md: 6}}
+            justifyContent='center'
+            alignItems='self-start'
+            paddingTop={6}
+            paddingBottom={6}>
+            <GalleryCard
+              albums={albums}
+              responseData={responseData}/>
+          </Grid>
           <Pagin
             page={page}
             totalPages={totalPages}
             handleChangePage={handleChangePage}/>
-        </Grid>}
+        </>
+      }
     </>
   )
 }

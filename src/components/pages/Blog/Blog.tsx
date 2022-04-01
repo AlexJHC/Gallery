@@ -71,21 +71,23 @@ export default function Blog() {
         handleTitleSearch={handleTitleSearch}
         handleFilter={handleFilter}/>
       {(!isFetching && !blogFetching) &&
-        <Grid
-          container
-          spacing={{xs: 2, md: 4}}
-          justifyContent='center'
-          alignItems='center'
-          paddingTop={6}
-          paddingBottom={6}>
-          <BlogCard
-            responseData={responseData}
-            usersResponse={usersResponse}/>
+        <>
+          <Grid
+            container
+            spacing={{xs: 2, md: 4}}
+            justifyContent='center'
+            alignItems='center'
+            paddingTop={6}
+            paddingBottom={6}>
+            <BlogCard
+              responseData={responseData}
+              usersResponse={usersResponse}/>
+          </Grid>
           <Pagin
             page={page}
             totalPages={totalPages}
             handleChangePage={handleChangePage}/>
-        </Grid>}
+        </>}
     </>
   )
 }
