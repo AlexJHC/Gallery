@@ -55,7 +55,7 @@ const ResponsiveAppBar = () => {
 
   return (
     <AppBar
-      sx={{backgroundColor:'dimgrey'}}
+      sx={{backgroundColor: 'dimgrey'}}
       position='static'>
       <Container
         maxWidth='xl'>
@@ -64,7 +64,7 @@ const ResponsiveAppBar = () => {
           <Box
             sx={{
               flexGrow: 1,
-              display: {xs: 'flex', md: 'none',justifyContent:'flex-end'}
+              display: {xs: 'flex', md: 'none', justifyContent: 'flex-end'}
             }}>
             <IconButton
               size='large'
@@ -99,7 +99,7 @@ const ResponsiveAppBar = () => {
           <Box
             sx={{
               flexGrow: 1,
-              display: {xs: 'none', md: 'flex',justifyContent: 'flex-end'}
+              display: {xs: 'none', md: 'flex', justifyContent: 'flex-end'}
             }}>
             {mapPagesForSmallMenu}
           </Box>
