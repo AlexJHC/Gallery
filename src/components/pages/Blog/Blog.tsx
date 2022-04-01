@@ -27,7 +27,7 @@ export default function Blog() {
   } = useSelector<RootState, InitialBlogStateType>(state => state.blog)
   const {order, sort} = {...filter}
 
-  const {data, isFetching, isError} = dataApi.useFetchAllPostsQuery({
+  const {data, isFetching, isError, isLoading} = dataApi.useFetchAllPostsQuery({
     sort,
     order,
     page,
@@ -35,7 +35,12 @@ export default function Blog() {
   })
   const {responseData, totalPages} = {...data}
 
-  const {data: dataResponse, isFetching: blogFetching, isError: blogError} = dataApi.useFetchAllUsersQuery({})
+  const {
+    data: dataResponse,
+    isFetching: blogFetching,
+    isError: blogError,
+    isLoading: blogLoading
+  } = dataApi.useFetchAllUsersQuery({})
   const {responseData: usersResponse} = {...dataResponse}
 
   const handleTitleSearch = useCallback((value: string) =>
@@ -54,31 +59,33 @@ export default function Blog() {
   }, [dispatch])
 
   if (isError || blogError) return <Error/>
-  if (isFetching || blogFetching) return <Loading/>
+  if (isLoading || blogLoading) return <Loading/>
 
   return (
     <>
       <BlogSearchSort
+        isFetching={(isFetching || blogFetching)}
         filterValue={filterValue}
         handleResetPage={handleResetPage}
         searchValue={search}
         handleTitleSearch={handleTitleSearch}
         handleFilter={handleFilter}/>
-      <Grid
-        container
-        spacing={{xs: 2, md: 4}}
-        justifyContent="center"
-        alignItems="center"
-        paddingTop={6}
-        paddingBottom={6}>
-        <BlogCard
-          responseData={responseData}
-          usersResponse={usersResponse}/>
-      </Grid>
-      <Pagin
-        page={page}
-        totalPages={totalPages}
-        handleChangePage={handleChangePage}/>
+      {(!isFetching && !blogFetching) &&
+        <Grid
+          container
+          spacing={{xs: 2, md: 4}}
+          justifyContent='center'
+          alignItems='center'
+          paddingTop={6}
+          paddingBottom={6}>
+          <BlogCard
+            responseData={responseData}
+            usersResponse={usersResponse}/>
+          <Pagin
+            page={page}
+            totalPages={totalPages}
+            handleChangePage={handleChangePage}/>
+        </Grid>}
     </>
   )
 }
