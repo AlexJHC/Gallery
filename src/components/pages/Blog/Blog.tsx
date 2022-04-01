@@ -8,7 +8,7 @@ import BlogSearchSort from './BlogSearchSort';
 import BlogCard from './BlogCard';
 import {
   ActionFilterType,
-  InitialAppStateType,
+  InitialBlogStateType,
   setCurrentPage,
   setFilter,
   setSearch
@@ -24,7 +24,7 @@ export default function Blog() {
     filter,
     currentPage: page,
     filterValue
-  } = useSelector<RootState, InitialAppStateType>(state => state.blog)
+  } = useSelector<RootState, InitialBlogStateType>(state => state.blog)
   const {order, sort} = {...filter}
 
   const {data, isFetching, isError} = dataApi.useFetchAllPostsQuery({

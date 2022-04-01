@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 
-const initialBlogState: InitialAppStateType = {
+const initialBlogState: InitialBlogStateType = {
   search: '',
   filter: {
     sort: '',
@@ -37,7 +37,7 @@ const blogSlice = createSlice({
   }
 })
 
-export type InitialAppStateType = {
+export type InitialBlogStateType = {
   search: string
   filter: FilterType
   currentPage: number
