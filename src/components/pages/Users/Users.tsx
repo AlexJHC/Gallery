@@ -2,7 +2,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {dataApi} from '../../../api/dataApi';
 import React, {ChangeEvent, useCallback} from 'react';
 import Grid from '@mui/material/Grid';
-import AreaCard from './UserCard';
+import UserCard from './UserCard';
 import Pagin from '../../features/Pagin/Pagin';
 import Loading from '../../features/Loading/Loading';
 import Error from '../../features/Alert/Error';
@@ -28,24 +28,11 @@ export default function Users() {
     <Grid
       container
       spacing={{xs: 4, md: 6}}
-      justifyContent="center"
-      alignItems="center"
+      justifyContent='center'
+      alignItems='self-start'
       paddingTop={6}
       paddingBottom={6}>
-      {responseData &&
-        responseData.map(user => (
-          <Grid item key={user.id}>
-            <AreaCard
-              name={user.name}
-              username={user.username}
-              companyName={user.company.name}
-              website={user.website}
-              phone={user.phone}
-              email={user.email}
-              location={user.address.geo}
-            />
-          </Grid>
-        ))}
+      <UserCard users={responseData}/>
       <Pagin
         page={page}
         totalPages={totalPages}
