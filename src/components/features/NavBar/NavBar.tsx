@@ -33,7 +33,7 @@ const ResponsiveAppBar = () => {
           key={page}
           onClick={handleCloseNavMenu}>
           <Typography
-            textAlign="center">
+            textAlign='center'>
             {page}
           </Typography>
         </MenuItem>
@@ -55,28 +55,29 @@ const ResponsiveAppBar = () => {
 
   return (
     <AppBar
-      position="static">
+      sx={{backgroundColor:'dimgrey'}}
+      position='static'>
       <Container
-        maxWidth="xl">
+        maxWidth='xl'>
         <Toolbar
           disableGutters>
           <Box
             sx={{
               flexGrow: 1,
-              display: {xs: 'flex', md: 'none'}
+              display: {xs: 'flex', md: 'none',justifyContent:'flex-end'}
             }}>
             <IconButton
-              size="large"
-              aria-label="app menu"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
+              size='large'
+              aria-label='app menu'
+              aria-controls='menu-appbar'
+              aria-haspopup='true'
               onClick={handleOpenNavMenu}
-              color="inherit"
+              color='inherit'
             >
               <MenuIcon/>
             </IconButton>
             <Menu
-              id="menu-appbar"
+              id='menu-appbar'
               anchorEl={anchorElNav}
               anchorOrigin={{
                 vertical: 'bottom',
@@ -98,7 +99,7 @@ const ResponsiveAppBar = () => {
           <Box
             sx={{
               flexGrow: 1,
-              display: {xs: 'none', md: 'flex'}
+              display: {xs: 'none', md: 'flex',justifyContent: 'flex-end'}
             }}>
             {mapPagesForSmallMenu}
           </Box>
