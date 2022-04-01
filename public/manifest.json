@@ -1,6 +1,6 @@
 {
-  "short_name": "Jsonplaceholder",
-  "name": "Create React Jsonplaceholder Rest api App",
+  "short_name": "Jsonplaceholder playground",
+  "name": "Create React Jsonplaceholder playground",
   "icons": [
     {
       "src": "favicon.ico",
