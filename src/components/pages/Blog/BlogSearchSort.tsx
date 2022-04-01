@@ -47,7 +47,7 @@ export default React.memo(function BlogSearchSort({
   useDebounce(
     () => {
       handleTitleSearch(search)
-    }, 800, [search])
+    }, 600, [search])
 
   const disableDeleteButton = search.length === 0
 

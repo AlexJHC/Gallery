@@ -4,6 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import {UserType} from '../../../api/dataApi';
 import Grid from '@mui/material/Grid';
+import loadingImg from '../../../assets/image/loading.jpg'
 
 type AreaCardPropsType = {
   users: UserType[] | undefined
@@ -16,6 +17,11 @@ export default React.memo(function UserCard({users}: AreaCardPropsType) {
       <Grid item key={user.id}>
         <Card sx={{maxWidth: 370}}>
           <iframe
+            style={{
+              backgroundImage: `url('${loadingImg}')`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center'
+            }}
             title={`${user.username} google map location`}
             src={`https://maps.google.com/maps?q=
             ${user.address.geo.lat},
